@@ -1,1 +1,4 @@
-console.log('\'Allo \'Allo!');
+'use strict';
+
+
+var flashduelApp = angular.module('app', []);
