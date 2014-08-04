@@ -22,8 +22,12 @@
 .player {
   position: relative;
   height: 60px;
-  width: 30px;
+  width: 75%;
   margin: auto;
+}
+
+.col-xs-1 {
+    padding: 0;
 }
 
 .row {
