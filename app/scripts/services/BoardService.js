@@ -31,20 +31,23 @@ angular
       };
 
       service.isSpaceEmpty = function isSpaceEmpty(location) {
-        return (service.board[location] === '') ? true : false;
+        $log.log('service.board[location]', service.board );
+        return (service.board[location] === '' && location < 18 && location > 0) ? true : false;
       };
 
-      service.actualMoveSpaces = function actualMove(player, attemptedMoveSpaces) {
-        var result;
+      service.actualMoveSpaces = function actualMove(player, spaces, direction) {
+        var result = 0;
+        $log.log('player', player, 'spaces', spaces);
 
-        for (var i = 1; i <= attemptedMoveSpaces; i++) {
-          var queryLocation = player.location + player.direction*i;
+        for (var i = 1; i <= spaces; i++) {
+          var queryLocation = player.position + player.direction*i*direction;
           if(service.isSpaceEmpty(queryLocation)) {
             result = i;
           }
         }
 
-        return result;
+        $log.log('result', result);
+        return player.position + result*player.direction*direction;
       };
 
       return service;

@@ -2,11 +2,12 @@
 
 angular
     .module('app')
-    .service('PlayerService', ['$log', function($log) {
+    .service('PlayerService', ['$log', 'BoardService', function($log, BoardService) {
       var service = {};
 
-      service.movePlayer = function movePlayer(player, spaces) {
-        player.position = player.position + (player.direction * spaces);
+      service.movePlayer = function movePlayer(player, spaces, direction) {
+        $log.log('player', player, spaces, direction);
+        player.position = BoardService.actualMoveSpaces(player, spaces, direction);
 
       };
 
