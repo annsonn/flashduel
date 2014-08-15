@@ -8,7 +8,8 @@
         <link rel="shortcut icon" href="/favicon.ico">
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
         <!-- build:css styles/vendor.css -->
-        <!-- bower:css -->        
+        <!-- bower:css -->
+        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
         <!-- endbower -->
         <!-- endbuild -->
         <!-- build:css(.tmp) styles/main.css -->        
@@ -27,24 +28,7 @@
 
           <div class="row table">
             <div class="board">
-              <div class="col-xs-1 dark space">1</div>
-              <div class="col-xs-1 dark space">2</div>
-              <div class="col-xs-1 light space">3</div>
-              <div class="col-xs-1 light space">4</div>
-              <div class="col-xs-1 dark space">5</div>
-              <div class="col-xs-1 dark space">6</div>
-              <div class="col-xs-1 light space">7</div>
-              <div class="col-xs-1 light space">8</div>
-              <div class="col-xs-1 dark space">9</div>
-              <div class="col-xs-1 dark space">10</div>
-              <div class="col-xs-1 light space">11</div>
-              <div class="col-xs-1 light space">12</div>
-              <div class="col-xs-1 dark space">13</div>
-              <div class="col-xs-1 dark space">14</div>
-              <div class="col-xs-1 light space">15</div>
-              <div class="col-xs-1 light space">16</div>
-              <div class="col-xs-1 dark space">17</div>
-              <div class="col-xs-1 dark space">18</div>
+              <div class="col-xs-1 space" ng-class="space.type" ng-repeat="space in board">{{space.number}}</div>              
             </div>
           </div>
           <div class="row players" ng-repeat="player in players">
@@ -69,10 +53,10 @@
 
         <!-- build:js scripts/vendor.js -->
         <!-- bower:js -->
-        <script src="../bower_components/jquery/dist/jquery.js"></script>
-        <script src="../bower_components/angular/angular.js"></script>'
-        <script src="../bower_components/angular-bootstrap/ui-bootstrap.js"></script>
-        <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+        <script src="bower_components/jquery/dist/jquery.js"></script>
+        <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="bower_components/angular/angular.js"></script>
+        <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
         <!-- endbower -->
         <!-- endbuild -->
 
