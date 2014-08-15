@@ -40,21 +40,33 @@
           {{numCardsRemaining()}}
           {{discardPile()}}
 
-          <div ng-repeat="player in players">
+          <div ng-repeat="player in players" ng-show="game.currentPlayer != $index">
             <h4>{{player.name}}</h4>
 
-            <select class="form-control" ng-disabled="game.currentPlayer != $index" ng-model="player.move">
-              <option ng-repeat="card in player.hand track by $index" value="{{card}}">{{card}}</option>
-            </select>
+            <tabset justified="true">
+              <tab heading="Move">
+                <h5>Move!</h5>
+                {{player.hand}}
+                <select class="form-control" ng-model="player.move">
+                  <option ng-repeat="card in player.hand track by $index" value="{{card}}">{{card}}</option>
+                </select>
 
-            <select class="form-control" ng-disabled="game.currentPlayer != $index" ng-model="direction">
-              <option value="1">Forward</option>
-              <option value="-1">Backwards</option>
-            </select>
+                <select class="form-control" ng-model="direction">
+                  <option value="1">Forward</option>
+                  <option value="-1">Backwards</option>
+                </select>
 
-            <button class="btn btn-default" ng-disabled="game.currentPlayer != $index" ng-click="actions.move(player, direction)">Go</button>
-
-            {{player}}
+                <button class="btn btn-default" ng-click="actions.move(player, direction)">Go</button>
+              </tab>
+              <tab heading="Attack">
+                <h5>Attack!</h5>
+                {{player.hand}}
+              </tab>
+              <tab heading="Dashing Stike">
+                <h5>Dashing Strike!</h5>
+                {{player.hand}}
+              </tab>
+            </tabset>
           </div>
         </div>
 
@@ -64,6 +76,7 @@
         <script src="../bower_components/jquery/dist/jquery.js"></script>
         <script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
         <script src="../bower_components/angular/angular.js"></script>
+        <script src="../bower_components/angular-bootstrap/ui-bootstrap.js"></script>
         <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
         <!-- endbower -->
         <!-- endbuild -->

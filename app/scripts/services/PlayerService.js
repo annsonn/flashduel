@@ -40,6 +40,7 @@ angular.module('app')
 
             DeckService.discardCards(player.hand.splice(player.hand.indexOf(player.move), 1));
             player.hand = player.hand.concat(DeckService.deal());
+            player.move = 0; //reset move
         };
 
         return service;
