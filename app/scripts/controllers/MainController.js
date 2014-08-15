@@ -9,8 +9,10 @@ angular.module('app')
 
     $scope.board = BoardService.board;
     $scope.players = PlayerService.players;
-    
-    $scope.movePlayer = PlayerService.movePlayer;
+
+    $scope.actions = {};
+
+    $scope.actions.movePlayer = PlayerService.movePlayer;
 
     $scope.deck = DeckService.cards;
 });

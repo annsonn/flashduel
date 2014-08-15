@@ -9,7 +9,6 @@
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
         <!-- build:css styles/vendor.css -->
         <!-- bower:css -->
-        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
         <!-- endbower -->
         <!-- endbuild -->
         <!-- build:css(.tmp) styles/main.css -->        
@@ -40,12 +39,18 @@
 
           <div ng-repeat="player in players">
             <h4>{{player.name}}</h4>
-            <button class="btn btn-default" ng-disabled="game.currentPlayer != $index" ng-click="movePlayer(player, player.move, 1)">Move Forward</button>
-            
-              <select class="class="form-control"" ng-disabled="game.currentPlayer != $index" ng-model="player.move">
-                <option ng-repeat="card in player.hand track by $index" value="{{card}}">{{card}}</option>
-              </select>
-            <button class="btn btn-default" ng-disabled="game.currentPlayer != $index" ng-click="movePlayer(player, player.move, -1)">Move Backward</button>
+
+            <select class="form-control" ng-disabled="game.currentPlayer != $index" ng-model="player.move">
+              <option ng-repeat="card in player.hand track by $index" value="{{card}}">{{card}}</option>
+            </select>
+
+            <select class="form-control" ng-disabled="game.currentPlayer != $index" ng-model="direction">
+              <option value="1">Forward</option>
+              <option value="-1">Backwards</option>
+            </select>
+
+            <button class="btn btn-default" ng-disabled="game.currentPlayer != $index" ng-click="actions.movePlayer(player, player.move, direction)">Go</button>
+
             {{player}}
           </div>
         </div>
@@ -53,10 +58,10 @@
 
         <!-- build:js scripts/vendor.js -->
         <!-- bower:js -->
-        <script src="bower_components/jquery/dist/jquery.js"></script>
-        <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-        <script src="bower_components/angular/angular.js"></script>
-        <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+        <script src="../bower_components/jquery/dist/jquery.js"></script>
+        <script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="../bower_components/angular/angular.js"></script>
+        <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
         <!-- endbower -->
         <!-- endbuild -->
 
