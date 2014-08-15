@@ -37,6 +37,9 @@
             </div>
           </div>
 
+          {{numCardsRemaining()}}
+          {{discardPile()}}
+
           <div ng-repeat="player in players">
             <h4>{{player.name}}</h4>
 

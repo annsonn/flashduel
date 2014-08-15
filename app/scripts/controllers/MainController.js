@@ -14,5 +14,11 @@ angular.module('app')
 
     $scope.actions.movePlayer = PlayerService.movePlayer;
 
-    $scope.deck = DeckService.cards;
+    $scope.numCardsRemaining = function numCardsRemaining() {
+      return DeckService.deck.length;
+    }
+
+    $scope.discardPile = function discardPile() {
+      return DeckService.discard;
+    }
 });
