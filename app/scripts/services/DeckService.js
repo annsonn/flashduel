@@ -8,7 +8,7 @@ angular.module('app')
     
     service.deck = service.cards.slice(0);
     
-    service.discard = [];
+    service.discardPile = [];
    
     service.shuffle = function shuffle() {
         for(var j, x, i = service.deck.length; i; j = parseInt(Math.random() * i), x = service.deck[--i], service.deck[i] = service.deck[j], service.deck[j] = x);
@@ -17,6 +17,10 @@ angular.module('app')
     service.deal = function deal(howMany) {
         var numberToDeal = howMany || 1;
         return service.deck.splice(0, numberToDeal);
+    };
+
+    service.discardCards = function discardCards(cards) {
+        service.discardPile = service.discardPile.concat(cards);
     };
     
     return service;

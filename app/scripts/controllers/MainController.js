@@ -10,15 +10,19 @@ angular.module('app')
     $scope.board = BoardService.board;
     $scope.players = PlayerService.players;
 
-    $scope.actions = {};
+    $scope.actions = {
+        move: PlayerService.movePlayer,
+        attack: '',
+        block: '',
+        dashingStrike: ''
+    };
 
-    $scope.actions.movePlayer = PlayerService.movePlayer;
 
     $scope.numCardsRemaining = function numCardsRemaining() {
       return DeckService.deck.length;
     }
 
     $scope.discardPile = function discardPile() {
-      return DeckService.discard;
+      return DeckService.discardPile;
     }
 });
