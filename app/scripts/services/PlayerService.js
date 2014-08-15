@@ -32,6 +32,7 @@ angular.module('app')
         service.movePlayer = function movePlayer(player, direction) {
             player.position = BoardService.actualMove(player, direction);
             GameService.changePlayer();
+            player.hand = player.hand.concat(DeckService.deal());
         };
 
         return service;
