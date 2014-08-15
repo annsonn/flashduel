@@ -33,10 +33,12 @@ angular.module('app')
             if (player.move === 0 || !direction) {
               return;
             }
+            player.move = parseInt(player.move);
+
             player.position = BoardService.actualMove(player, direction);
             GameService.changePlayer();
 
-            DeckService.discardCards(player.hand.splice(player.hand.indexOf(player.hand.move), 1));
+            DeckService.discardCards(player.hand.splice(player.hand.indexOf(player.move), 1));
             player.hand = player.hand.concat(DeckService.deal());
         };
 
