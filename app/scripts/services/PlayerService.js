@@ -1,13 +1,38 @@
 'use strict';
 
 angular.module('app')
-    .service('PlayerService', function($log, BoardService, GameService) {
-      var service = {};
+    .service('PlayerService', function($log, BoardService, GameService, DeckService) {
+        var service = {};
 
-      service.movePlayer = function movePlayer(player, spaces, direction) {
-        player.position = BoardService.actualMove(player, spaces, direction);
-        GameService.changePlayer();
-      };
+        service.resetPlayers = function resetPlayers() {
+            DeckService.shuffle();
 
-      return service;
+            var players =  [{
+                name: 'Player 1',
+                color: 'red',
+                position: 1,
+                direction: 1,
+                move: 1,
+                hand: DeckService.deal(5)
+            }, {
+                name: 'Player 2',
+                color: 'blue',
+                position: 18,
+                direction: -1,
+                move: 1,
+                hand: DeckService.deal(5)
+            }];
+
+            return players;
+        };
+
+
+        service.players = service.resetPlayers();
+
+        service.movePlayer = function movePlayer(player, spaces, direction) {
+            player.position = BoardService.actualMove(player, spaces, direction);
+            GameService.changePlayer();
+        };
+
+        return service;
     });

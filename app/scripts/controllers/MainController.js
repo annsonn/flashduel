@@ -7,9 +7,9 @@ angular.module('app')
     $scope.game = GameService;
     BoardService.reset();
 
-    $scope.players = GameService.resetPlayers;
-
+    $scope.players = PlayerService.players;
+    
     $scope.movePlayer = PlayerService.movePlayer;
 
     $scope.deck = DeckService.cards;
-  });
+});
