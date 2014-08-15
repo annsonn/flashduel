@@ -56,12 +56,12 @@
 
           <div ng-repeat="player in players">
             <h4>{{player.name}}</h4>
-            <button ng-disabled="game.currentPlayer != $index" ng-click="movePlayer(player, player.move, 1)">Move Forward</button>
+            <button class="btn btn-default" ng-disabled="game.currentPlayer != $index" ng-click="movePlayer(player, player.move, 1)">Move Forward</button>
             
-              <select ng-disabled="game.currentPlayer != $index" ng-model="player.move">
+              <select class="class="form-control"" ng-disabled="game.currentPlayer != $index" ng-model="player.move">
                 <option ng-repeat="card in player.hand track by $index" value="{{card}}">{{card}}</option>
               </select>
-            <button ng-disabled="game.currentPlayer != $index" ng-click="movePlayer(player, player.move, -1)">Move Backward</button>
+            <button class="btn btn-default" ng-disabled="game.currentPlayer != $index" ng-click="movePlayer(player, player.move, -1)">Move Backward</button>
             {{player}}
           </div>
         </div>
