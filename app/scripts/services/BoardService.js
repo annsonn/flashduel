@@ -1,8 +1,7 @@
 'use strict';
 
-angular
-    .module('app')
-    .service('BoardService', ['$log', 'Values', function($log, Values) {
+angular.module('app')
+    .service('BoardService', function($log, Values) {
       var service = {};
 
       service.board = [];
@@ -56,4 +55,4 @@ angular
       };
 
       return service;
-    }]);
+    });
