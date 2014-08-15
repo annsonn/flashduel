@@ -2,11 +2,13 @@
 
 angular
     .module('app')
-    .controller('MainController', ['$scope', '$log', 'DeckService', 'PlayerService', 'BoardService',
-      function($scope, $log, DeckService, PlayerService, BoardService) {
+    .controller('MainController', ['$scope', '$log', 'DeckService', 'PlayerService', 'BoardService', 'GameService',
+      function($scope, $log, DeckService, PlayerService, BoardService, GameService) {
         $scope.title = 'Flash Duel';
 
+        $scope.game = GameService;
         BoardService.reset();
+
         $scope.players = [{
           name: 'Player 1',
           color: 'red',

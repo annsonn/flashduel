@@ -56,9 +56,9 @@
 
           <div ng-repeat="player in players">
             <h4>{{player.name}}</h4>
-            <button ng-click="movePlayer(player, player.move, 1)">Move Forward</button>
-            <input type="number" ng-model="player.move" placeholder="1"/>
-            <button ng-click="movePlayer(player, player.move, -1)">Move Backward</button>
+            <button ng-disabled="game.currentPlayer != $index" ng-click="movePlayer(player, player.move, 1)">Move Forward</button>
+            <input ng-disabled="game.currentPlayer != $index" type="number" ng-model="player.move" placeholder="1"/>
+            <button ng-disabled="game.currentPlayer != $index" ng-click="movePlayer(player, player.move, -1)">Move Backward</button>
           </div>
         </div>
 
@@ -80,6 +80,7 @@
         <script src="scripts/controllers/MainController.js"></script>
         <script src="scripts/services/BoardService.js"></script>
         <script src="scripts/services/DeckService.js"></script>
+        <script src="scripts/services/GameService.js"></script>
         <script src="scripts/services/PlayerService.js"></script>
         <script src="scripts/services/Values.js"></script>
         <!-- endbuild -->

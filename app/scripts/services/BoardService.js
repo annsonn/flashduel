@@ -31,23 +31,28 @@ angular
       };
 
       service.isSpaceEmpty = function isSpaceEmpty(location) {
-        $log.log('service.board[location]', service.board );
-        return (service.board[location] === '' && location < 18 && location > 0) ? true : false;
+        return !!(service.board[location-1] === '' && location < 18 && location > 0);
       };
 
-      service.actualMoveSpaces = function actualMove(player, spaces, direction) {
-        var result = 0;
-        $log.log('player', player, 'spaces', spaces);
+      service.updatePlayerPosition = function updatePlayerPosition(oldLocation, newLocation) {
+        var movingPlayer = service.board[oldLocation-1];
+        service.board[oldLocation-1] = '';
+        service.board[newLocation-1] = movingPlayer;
+      };
 
+      service.actualMove = function actualMove(player, spaces, direction) {
+        var result = 0;
         for (var i = 1; i <= spaces; i++) {
           var queryLocation = player.position + player.direction*i*direction;
-          if(service.isSpaceEmpty(queryLocation)) {
+          if (service.isSpaceEmpty(queryLocation)) {
             result = i;
+          } else {
+            break;
           }
         }
-
-        $log.log('result', result);
-        return player.position + result*player.direction*direction;
+        var newLocation = player.position + result*player.direction*direction;
+        service.updatePlayerPosition(player.position, newLocation);
+        return newLocation;
       };
 
       return service;
