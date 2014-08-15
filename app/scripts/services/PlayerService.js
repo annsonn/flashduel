@@ -12,14 +12,14 @@ angular.module('app')
                 color: 'red',
                 position: 1,
                 direction: 1,
-                move: 1,
+                move: 0,
                 hand: DeckService.deal(5)
             }, {
                 name: 'Player 2',
                 color: 'blue',
                 position: 18,
                 direction: -1,
-                move: 1,
+                move: 0,
                 hand: DeckService.deal(5)
             }];
 
@@ -29,8 +29,8 @@ angular.module('app')
 
         service.players = service.resetPlayers();
 
-        service.movePlayer = function movePlayer(player, spaces, direction) {
-            player.position = BoardService.actualMove(player, spaces, direction);
+        service.movePlayer = function movePlayer(player, direction) {
+            player.position = BoardService.actualMove(player, direction);
             GameService.changePlayer();
         };
 

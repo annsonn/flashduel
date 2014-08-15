@@ -49,7 +49,7 @@
               <option value="-1">Backwards</option>
             </select>
 
-            <button class="btn btn-default" ng-disabled="game.currentPlayer != $index" ng-click="actions.movePlayer(player, player.move, direction)">Go</button>
+            <button class="btn btn-default" ng-disabled="game.currentPlayer != $index" ng-click="actions.movePlayer(player, direction)">Go</button>
 
             {{player}}
           </div>

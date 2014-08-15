@@ -39,9 +39,9 @@ angular.module('app')
             service.board[newLocation-1].occupied = movingPlayer;
         };
 
-        service.actualMove = function actualMove(player, spaces, direction) {
+        service.actualMove = function actualMove(player, direction) {
             var result = 0;
-            for (var i = 1; i <= spaces; i++) {
+            for (var i = 1; i <= player.move; i++) {
                 var queryLocation = player.position + player.direction*i*direction;
                 if (service.isSpaceEmpty(queryLocation)) {
                     result = i;
