@@ -11,8 +11,8 @@ angular.module('app')
     $scope.players = PlayerService.players;
 
     $scope.actions = {
-        move: PlayerService.movePlayer,
-        attack: '',
+        move: PlayerService.move,
+        attack: PlayerService.attack,
         block: '',
         dashingStrike: ''
     };

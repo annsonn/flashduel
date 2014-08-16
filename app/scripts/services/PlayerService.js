@@ -29,7 +29,7 @@ angular.module('app')
 
         service.players = service.resetPlayers();
 
-        service.movePlayer = function movePlayer(player, direction) {
+        service.move = function move(player, direction) {
             if (player.move === 0 || !direction) {
               return;
             }
@@ -41,6 +41,12 @@ angular.module('app')
             DeckService.discardCards(player.hand.splice(player.hand.indexOf(player.move), 1));
             player.hand = player.hand.concat(DeckService.deal());
             player.move = 0; //reset move
+        };
+
+        service.attack = function attack(player, distance) {
+            // Check if board is anyone is there
+            // Attack opponent
+            // Tell other player to defend
         };
 
         return service;
