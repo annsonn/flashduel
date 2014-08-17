@@ -12,14 +12,14 @@ angular.module('app')
                 color: 'red',
                 position: 1,
                 direction: 1,
-                move: 0,
+                move: null,
                 hand: DeckService.deal(5)
             }, {
                 name: 'Player 2',
                 color: 'blue',
                 position: 18,
                 direction: -1,
-                move: 0,
+                move: null,
                 hand: DeckService.deal(5)
             }];
 
@@ -30,20 +30,19 @@ angular.module('app')
         service.players = service.resetPlayers();
 
         service.move = function move(player, direction) {
-            if (player.move === 0 || !direction) {
+            if (player.move === null || !direction) {
               return;
             }
-            player.move = parseInt(player.move);
-
             player.position = BoardService.actualMove(player, direction);
             GameService.changePlayer();
 
-            DeckService.discardCards(player.hand.splice(player.hand.indexOf(player.move), 1));
+            DeckService.discardCards(player.hand.splice(player.move , 1));
             player.hand = player.hand.concat(DeckService.deal());
-            player.move = 0; //reset move
+            player.move = null; //reset move
         };
 
-        service.attack = function attack(player, distance) {
+        service.attack = function attack(player, cards) {
+            $log.log('attack', cards);
             // Check if board is anyone is there
             // Attack opponent
             // Tell other player to defend

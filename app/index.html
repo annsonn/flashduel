@@ -48,10 +48,8 @@
                 <h5>Move!</h5>
                 {{player.hand}}
                 <select class="form-control" ng-model="player.move">
-                  <option ng-repeat="card in player.hand track by $index" value="{{card}}">{{card}}</option>
+                  <option ng-repeat="card in player.hand track by $index" value="{{$index}}">{{card}}</option>
                 </select>
-
-                <!--span ng-repeat="card in player.hand track by $index"><input type="radio" ng-model="player.move" value="{{card}}">{{card}}</span>-->
 
                 <select class="form-control" ng-model="direction">
                   <option value="1">Forward</option>
@@ -63,10 +61,8 @@
               <tab heading="Attack">
                 <h5>Attack!</h5>
                 {{player.hand}}
-                <select class="form-control" ng-model="distance">
-                  <option ng-repeat="card in player.hand track by $index" value="{{card}}">{{card}}</option>
-                </select>
-                <button class="btn btn-default" ng-click="actions.attack(player, distance)">Go</button>
+                <input ng-repeat="card in player.hand track by $index" value="{{card}}" type="checkbox" ng-model="attack">
+                <button class="btn btn-default" ng-click="actions.attack(player, attack)">Go</button>
               </tab>
               <tab heading="Dashing Stike">
                 <h5>Dashing Strike!</h5>

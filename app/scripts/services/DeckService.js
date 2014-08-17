@@ -4,8 +4,16 @@ angular.module('app')
   .service('DeckService', function() {
     var service = {};
 
-    service.cards = [1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5];
-    
+    service.cards = [
+      1,1,1,1,1, 2,2,2,2,2, 3,3,3,3,3, 4,4,4,4,4, 5,5,5,5,5
+    ];
+
+     /* {number: 1}, {number: 1}, {number: 1}, {number: 1}, {number: 1},
+      {number: 2}, {number: 2}, {number: 2}, {number: 2}, {number: 2},
+      {number: 3}, {number: 3}, {number: 3}, {number: 3}, {number: 3},
+      {number: 4}, {number: 4}, {number: 4}, {number: 4}, {number: 4},
+      {number: 5}, {number: 5}, {number: 5}, {number: 5}, {number: 5}*/
+
     service.deck = service.cards.slice(0);
     
     service.discardPile = [];

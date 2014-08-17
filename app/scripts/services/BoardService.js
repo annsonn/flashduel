@@ -41,7 +41,7 @@ angular.module('app')
 
         service.actualMove = function actualMove(player, direction) {
             var result = 0;
-            for (var i = 1; i <= player.move; i++) {
+            for (var i = 1; i <= player.hand[player.move]; i++) {
                 var queryLocation = player.position + player.direction*i*direction;
                 if (service.isSpaceEmpty(queryLocation)) {
                     result = i;
