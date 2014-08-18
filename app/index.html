@@ -45,8 +45,7 @@
 
             <tabset justified="true">
               <tab heading="Move">
-                <h5>Move!</h5>
-                {{player.hand}}
+                <br>
                 <div class="btn-group">
                   <label ng-repeat="card in player.hand track by $index" class="btn btn-primary" ng-model="player.move" btn-radio="{{$index}}">{{card}}</label>
                 </div>
@@ -56,15 +55,14 @@
                   <label class="btn btn-primary" ng-model="direction" btn-radio="-1">Backward</label>
                 </div>
 
-                <button class="btn btn-default" ng-click="actions.move(player, direction)">Go</button>
+                <button class="btn btn-default" ng-click="actions.move(player, direction)">Move!</button>
               </tab>
               <tab heading="Attack">
-                <h5>Attack!</h5>
-                {{player.hand}}
+                <br>
                 <div class="btn-group">
                    <label ng-repeat="card in player.hand track by $index" class="btn btn-primary" ng-model="player.attack[$index]" btn-checkbox>{{card}}</label>
                 </div>
-                <button class="btn btn-default" ng-click="actions.attack(player, attack)">Go</button>
+                <button class="btn btn-default" ng-click="actions.attack(player, attack)">Attack!</button>
               </tab>
               <tab heading="Dashing Stike">
                 <h5>Dashing Strike!</h5>
