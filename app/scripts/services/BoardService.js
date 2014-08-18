@@ -1,14 +1,14 @@
 'use strict';
 
 angular.module('app')
-    .service('BoardService', function($log, Values) {
+    .service('BoardService', function($log) {
         var service = {};
 
         service.board = [];
 
         service.reset = function() {
             service.board = [
-              {type: 'dark', number:'1', occupied: Values.playerOne},
+              {type: 'dark', number:'1', occupied: 0},
               {type: 'dark', number:'2', occupied: ''},
               {type: 'light', number:'3', occupied: ''},
               {type: 'light', number:'4', occupied: ''},
@@ -25,8 +25,13 @@ angular.module('app')
               {type: 'light', number:'15', occupied: ''},
               {type: 'light', number:'16', occupied: ''},
               {type: 'dark', number:'17', occupied: ''},
-              {type: 'dark', number:'18', occupied: Values.playerTwo},
+              {type: 'dark', number:'18', occupied: 1}
             ];
+        };
+
+        service.getPlayerByLocation = function getPlayerByLocation(targetLocation) {
+           var isEmpty = service.isSpaceEmpty(targetLocation);
+           return (!isEmpty) ? service.board[targetLocation-1].occupied : '';
         };
 
         service.isSpaceEmpty = function isSpaceEmpty(location) {
