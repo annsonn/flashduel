@@ -13,6 +13,7 @@ angular.module('app')
                 position: 1,
                 direction: 1,
                 move: null,
+                attack: [],
                 hand: DeckService.deal(5)
             }, {
                 name: 'Player 2',
@@ -20,6 +21,7 @@ angular.module('app')
                 position: 18,
                 direction: -1,
                 move: null,
+                attack: [],
                 hand: DeckService.deal(5)
             }];
 
@@ -41,8 +43,8 @@ angular.module('app')
             player.move = null; //reset move
         };
 
-        service.attack = function attack(player, cards) {
-            $log.log('attack', cards);
+        service.attack = function attack(player) {
+            $log.log('attack', player.attack);
             // Check if board is anyone is there
             // Attack opponent
             // Tell other player to defend

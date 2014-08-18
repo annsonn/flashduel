@@ -61,7 +61,10 @@
               <tab heading="Attack">
                 <h5>Attack!</h5>
                 {{player.hand}}
-                <input ng-repeat="card in player.hand track by $index" value="{{card}}" type="checkbox" ng-model="attack">
+                <span ng-repeat="card in player.hand track by $index">
+                  <label>{{card}}</label>
+                  <input value="{{$index}}" type="checkbox" ng-model="player.attack[$index]">
+                </span>
                 <button class="btn btn-default" ng-click="actions.attack(player, attack)">Go</button>
               </tab>
               <tab heading="Dashing Stike">
