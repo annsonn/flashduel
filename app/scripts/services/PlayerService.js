@@ -45,6 +45,11 @@ angular.module('app')
 
         service.attack = function attack(player) {
             $log.log('attack', player.attack);
+
+            // todo: checl if selected cards match
+
+            // do attack
+              // if successfully played then reset attack variable
             // Check if board is anyone is there
             // Attack opponent
             // Tell other player to defend
