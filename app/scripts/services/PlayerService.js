@@ -31,16 +31,27 @@ angular.module('app')
 
         service.players = service.resetPlayers();
 
-        service.move = function move(player, direction) {
-            if (player.move === null || !direction) {
-              return;
-            }
-            player.position = BoardService.actualMove(player, direction);
-            GameService.changePlayer();
+        var DealPlayerHand = function DealPlayerHand(player) {
+          var missingCards = 5 - player.hand.length;
 
-            DeckService.discardCards(player.hand.splice(player.move , 1));
-            player.hand = player.hand.concat(DeckService.deal());
-            player.move = null; //reset move
+          for (var i = 0; i < missingCards; i++) {
+            player.hand = player.hand.concat(DeckService.deal(1));
+          }
+          return player.hand;
+
+        };
+
+        service.move = function move(player, direction) {
+          if (player.move === null || !direction) {
+            return;
+          }
+          player.position = BoardService.actualMove(player, direction);
+          GameService.changePlayer();
+
+          DeckService.discardCards(player.hand.splice(player.move , 1));
+
+          player.hand = DealPlayerHand(player);
+          player.move = null; //reset move
         };
 
         var attackNumbersMatch = function attackNumbersMatch(player) {
@@ -63,35 +74,50 @@ angular.module('app')
         };
 
         service.attack = function attack(player) {
-            $log.log('attack', player.attack, player.hand);
+          $log.log('attack', player.attack, player.hand);
 
-            var action = {
-              attack: attackNumbersMatch(player),
-            };
+          var action = {
+            attack: attackNumbersMatch(player),
+          };
 
-            if (action.attack.number == 0) {
-                return;
+          if (action.attack.number == 0) {
+              $log.log('no attack card selected');
+              return {error: 'no attack card selected'};
+          }
+
+          action.targetLocation =  player.position + player.direction*action.attack.number;
+          action.opponentPlayerIndex = BoardService.getPlayerByLocation(action.targetLocation);
+
+          if (action.opponentPlayerIndex == '') {
+              $log.log('cannot attack opponent with ', action.attack.number);
+              return {error: 'cannot attack opponent with ' + action.attack.number};
+          }
+
+          $log.log('attacking opponent player with ', action.attack.number, ' quantity', action.attack.quantity);
+
+          var opponentPlayer = service.players[parseInt(action.opponentPlayerIndex)];
+
+          $log.log('opponentPlayer', opponentPlayer);
+
+          for (var i = 0; i < action.attack.quantity; i++) {
+            var opponentCanBlock = opponentPlayer.hand.indexOf(action.attack.number);
+            if (opponentCanBlock == -1) {
+              GameService.changePlayer();
+              GameService.gameOver();
+              $log.log('opponent cannot block');
+              return {success: 'opponent cannot block'};
             }
+            opponentPlayer.hand.splice(opponentCanBlock, 1);
+            $log.log('opponent blocked 1 attack', opponentPlayer.hand);
+            player.hand.splice(player.hand.indexOf(action.attack.number), 1);
+          }
 
-            action.targetLocation =  player.position + player.direction*action.attack.number;
-            action.opponentPlayerIndex = BoardService.getPlayerByLocation(action.targetLocation);
+          GameService.changePlayer();
+          player.hand = DealPlayerHand(player);
+          service.players[parseInt(action.opponentPlayerIndex)] = opponentPlayer;
+          $log.log('opponent blocked attack', opponentPlayer.hand);
+          return {failed: 'opponent blocked attack'};
 
-            if (action.opponentPlayerIndex == '') {
-                $log.log('cannot attack opponent with ', action.attack.number);
-                return;
-            }
-
-            $log.log('attacking opponent player with ', action.attack.number, ' quantity', action.attack.quantity);
-
-            var opponentPlayer = service.players[parseInt(action.opponentPlayerIndex)];
-
-            $log.log('opponentPlayer', opponentPlayer);
-
-            // do attack
-              // if successfully played then reset attack variable
-            // Check if board is anyone is there
-            // Attack opponent
-            // Tell other player to defend
         };
 
         return service;

@@ -40,7 +40,7 @@
           Cards Remaining: {{numCardsRemaining()}}
           Discard Pile: {{discardPile()}}
 
-          <div ng-repeat="player in players" ng-show="game.currentPlayer != $index">
+          <div ng-repeat="player in players" ng-show="game.currentPlayer != $index && !game.gameEnded">
             <h4>{{player.name}}</h4>
 
             <tabset justified="true">
@@ -69,6 +69,9 @@
                 {{player.hand}}
               </tab>
             </tabset>
+          </div>
+          <div ng-show="game.gameEnded">
+            <h3>Game Over</h3>
           </div>
         </div>
 
