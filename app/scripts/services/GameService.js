@@ -15,7 +15,6 @@ angular.module('app')
     };
 
     service.gameOver = function gameOver() {
-      $log.log('game over!');
       service.gameEnded = true;
     };
 

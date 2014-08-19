@@ -4,6 +4,7 @@ angular.module('app')
     .service('PlayerService', function($log, BoardService, GameService, DeckService, PlayerUtilService, Values) {
         var service = {};
 
+        // todo: should this be controlled by gameservice?
         service.resetPlayers = function resetPlayers() {
             DeckService.shuffle();
 
