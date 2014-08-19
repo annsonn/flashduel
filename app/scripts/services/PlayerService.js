@@ -44,38 +44,48 @@ angular.module('app')
         };
 
         var attackNumbersMatch = function attackNumbersMatch(player) {
-          var attackNumber = 0;
+          var attack = {
+              number: 0,
+              quantity: 0
+          };
           for (var i = 0; i < player.attack.length; i++) {
-            if (attackNumber === 0 && player.attack[i] == true) {
-              attackNumber = player.hand[i];
+            if (attack.number === 0 && player.attack[i] == true) {
+              attack.number = player.hand[i];
             }
-            if (attackNumber != 0 && player.attack[i] == true && player.hand[i] != attackNumber) {
+            if (player.attack[i] == true && attack.number == player.hand[i]) {
+              attack.quantity = attack.quantity + 1;
+            }
+            if (attack.number != 0 && player.attack[i] == true && player.hand[i] != attack.number) {
               return 0;
             }
           }
-          return attackNumber;
+          return attack;
         };
 
         service.attack = function attack(player) {
-            $log.log('attack', player.attack);
+            $log.log('attack', player.attack, player.hand);
 
-            var attack = {
-              number: attackNumbersMatch(player),
+            var action = {
+              attack: attackNumbersMatch(player),
             };
 
-            if (attack.number == 0) {
+            if (action.attack.number == 0) {
                 return;
             }
 
-            attack.targetLocation =  player.position + player.direction*attack.number;
-            attack.opponentPlayerIndex = BoardService.getPlayerByLocation(attack.targetLocation);
+            action.targetLocation =  player.position + player.direction*action.attack.number;
+            action.opponentPlayerIndex = BoardService.getPlayerByLocation(action.targetLocation);
 
-            if (attack.opponentPlayerIndex != '') {
-                $log.log('attacking opponent player with ', attack.number);
-                var opponentPlayer = service.players[attack.opponentPlayerIndex];
-
+            if (action.opponentPlayerIndex == '') {
+                $log.log('cannot attack opponent with ', action.attack.number);
+                return;
             }
-            $log.log('cannot attack opponent with ', attack.number);
+
+            $log.log('attacking opponent player with ', action.attack.number, ' quantity', action.attack.quantity);
+
+            var opponentPlayer = service.players[parseInt(action.opponentPlayerIndex)];
+
+            $log.log('opponentPlayer', opponentPlayer);
 
             // do attack
               // if successfully played then reset attack variable
@@ -83,8 +93,6 @@ angular.module('app')
             // Attack opponent
             // Tell other player to defend
         };
-
-
 
         return service;
     });

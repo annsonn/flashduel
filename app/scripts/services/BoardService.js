@@ -1,14 +1,14 @@
 'use strict';
 
 angular.module('app')
-    .service('BoardService', function($log) {
+    .service('BoardService', function($log, Values) {
         var service = {};
 
         service.board = [];
 
         service.reset = function() {
             service.board = [
-              {type: 'dark', number:'1', occupied: 0},
+              {type: 'dark', number:'1', occupied: {player: Values.playerOne, index: '0'}},
               {type: 'dark', number:'2', occupied: ''},
               {type: 'light', number:'3', occupied: ''},
               {type: 'light', number:'4', occupied: ''},
@@ -25,17 +25,16 @@ angular.module('app')
               {type: 'light', number:'15', occupied: ''},
               {type: 'light', number:'16', occupied: ''},
               {type: 'dark', number:'17', occupied: ''},
-              {type: 'dark', number:'18', occupied: 1}
+              {type: 'dark', number:'18', occupied: {player: Values.playerTwo, index: '1'}}
             ];
         };
 
         service.getPlayerByLocation = function getPlayerByLocation(targetLocation) {
-           var isEmpty = service.isSpaceEmpty(targetLocation);
-           return (!isEmpty) ? service.board[targetLocation-1].occupied : '';
+           return (service.board[targetLocation-1].occupied.index) ? service.board[targetLocation-1].occupied.index : '';
         };
 
         service.isSpaceEmpty = function isSpaceEmpty(location) {
-            return !!(service.board[location-1].occupied === '' && location < 18 && location > 0);
+            return (location > 0 && location < 18 && service.board[location - 1].occupied === '');
         };
 
         service.updatePlayerPosition = function updatePlayerPosition(oldLocation, newLocation) {
