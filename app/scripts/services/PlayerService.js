@@ -73,8 +73,21 @@ angular.module('app')
           return attack;
         };
 
+        var attackOpponent = function attackOpponent(player, opponentPlayer, action) {
+          for (var i = 0; i < action.attack.quantity; i++) {
+            var opponentCanBlock = opponentPlayer.hand.indexOf(action.attack.number);
+            if (opponentCanBlock == -1) {
+              return {successful: 'opponent cannot block'};
+            }
+            opponentPlayer.hand.splice(opponentCanBlock, 1);
+            $log.log('opponent blocked 1 of '+ action.attack.quantity + ' attack', opponentPlayer.hand);
+            player.hand.splice(player.hand.indexOf(action.attack.number), 1);
+          }
+          $log.log('opponent blocked attack', opponentPlayer.hand);
+          return {failed: 'opponent blocked attack'};
+        };
+
         service.attack = function attack(player) {
-          $log.log('attack', player.attack, player.hand);
 
           var action = {
             attack: attackNumbersMatch(player),
@@ -97,27 +110,16 @@ angular.module('app')
 
           var opponentPlayer = service.players[parseInt(action.opponentPlayerIndex)];
 
-          $log.log('opponentPlayer', opponentPlayer);
+          var resolution = attackOpponent(player, opponentPlayer, action);
 
-          for (var i = 0; i < action.attack.quantity; i++) {
-            var opponentCanBlock = opponentPlayer.hand.indexOf(action.attack.number);
-            if (opponentCanBlock == -1) {
-              GameService.changePlayer();
-              GameService.gameOver();
-              $log.log('opponent cannot block');
-              return {success: 'opponent cannot block'};
-            }
-            opponentPlayer.hand.splice(opponentCanBlock, 1);
-            $log.log('opponent blocked 1 attack', opponentPlayer.hand);
-            player.hand.splice(player.hand.indexOf(action.attack.number), 1);
-          }
+          if (resolution.successful) {
+            $log.log('opponent cannot block');
+            GameService.gameOver();
+          };
 
           GameService.changePlayer();
           player.hand = DealPlayerHand(player);
           service.players[parseInt(action.opponentPlayerIndex)] = opponentPlayer;
-          $log.log('opponent blocked attack', opponentPlayer.hand);
-          return {failed: 'opponent blocked attack'};
-
         };
 
         return service;
