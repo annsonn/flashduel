@@ -25,17 +25,7 @@
         <div class="container">
           <h3 class="text-muted">{{title}}</h3>
 
-          <div class="row table">
-            <div class="board">
-              <div class="col-xs-1 space" ng-class="space.type" ng-repeat="space in board">{{space.number}}</div>              
-            </div>
-          </div>
-          <div class="row players" ng-repeat="player in players">
-            <div class="col-xs-1 {{'col-xs-offset-' + (player.position - 1)}}" style="top: {{-100 -60*($index-1)}}px;">
-              <div class="player" style="background-color: {{player.color}};">
-              </div>
-            </div>
-          </div>
+          <div ng-include="'views/board.html'"></div>
 
           Cards Remaining: {{numCardsRemaining()}}
           Discard Pile: {{discardPile()}}
@@ -46,23 +36,11 @@
             <tabset justified="true">
               <tab heading="Move">
                 <br>
-                <div class="btn-group">
-                  <label ng-repeat="card in player.hand track by $index" class="btn btn-primary" ng-model="player.move" btn-radio="{{$index}}">{{card}}</label>
-                </div>
-
-                <div class="btn-group">
-                  <label class="btn btn-primary" ng-model="direction" btn-radio="1">Forward</label>
-                  <label class="btn btn-primary" ng-model="direction" btn-radio="-1">Backward</label>
-                </div>
-
-                <button class="btn btn-default" ng-click="actions.move(player, direction)">Move!</button>
+                <div ng-include="'views/move.html'"></div>
               </tab>
               <tab heading="Attack">
                 <br>
-                <div class="btn-group">
-                   <label ng-repeat="card in player.hand track by $index" class="btn btn-primary" ng-model="player.attack[$index]" btn-checkbox>{{card}}</label>
-                </div>
-                <button class="btn btn-default" ng-click="actions.attack(player, attack)">Attack!</button>
+                <div ng-include="'views/attack.html'"></div>
               </tab>
               <tab heading="Dashing Stike">
                 <h5>Dashing Strike!</h5>

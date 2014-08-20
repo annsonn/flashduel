@@ -1,0 +1,11 @@
+<div class="row table">
+  <div class="board">
+    <div class="col-xs-1 space" ng-class="space.type" ng-repeat="space in board">{{space.number}}</div>
+  </div>
+</div>
+<div class="row players" ng-repeat="player in players">
+  <div class="col-xs-1 {{'col-xs-offset-' + (player.position - 1)}}" style="top: {{-100 -60*($index-1)}}px;">
+    <div class="player" style="background-color: {{player.color}};">
+    </div>
+  </div>
+</div>
