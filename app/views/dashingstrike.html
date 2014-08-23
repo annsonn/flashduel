@@ -1,3 +1,9 @@
-<h3>Dashing Strike!</h3>
+<div class="btn-group">
+  <label ng-repeat="card in player.hand track by $index" class="btn btn-primary" ng-model="player.move" btn-radio="{{$index}}">{{card}}</label>
+</div>
 
-{{player.hand}}
+<div class="btn-group">
+  <label ng-repeat="card in player.hand track by $index" class="btn btn-warning" ng-model="player.attack[$index]" btn-checkbox>{{card}}</label>
+</div>
+
+<button class="btn btn-success" ng-click="">Dashing Strike!</button>
