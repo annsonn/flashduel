@@ -1,9 +1,9 @@
 <div class="btn-group">
-  <label ng-repeat="card in player.hand track by $index" class="btn btn-primary" ng-model="player.move" btn-radio="{{$index}}">{{card}}</label>
+  <label ng-repeat="card in player.hand track by $index" class="btn btn-primary" ng-model="player.dashingStrike.move" btn-radio="{{$index}}">{{card}}</label>
 </div>
 
 <div class="btn-group">
-  <label ng-repeat="card in player.hand track by $index" class="btn btn-warning" ng-model="player.attack[$index]" btn-checkbox>{{card}}</label>
+  <label ng-repeat="card in player.hand track by $index" class="btn btn-warning" ng-model="player.dashingStrike.attack[$index]" btn-checkbox>{{card}}</label>
 </div>
 
-<button class="btn btn-success" ng-click="">Dashing Strike!</button>
+<button class="btn btn-success" ng-click="actions.dashingStrike(player)">Dashing Strike!</button>

@@ -14,7 +14,7 @@ angular.module('app')
         move: PlayerService.move,
         attack: PlayerService.attack,
         block: '',
-        dashingStrike: ''
+        dashingStrike: PlayerService.dashStrike
     };
 
 

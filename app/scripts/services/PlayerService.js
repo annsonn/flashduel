@@ -15,6 +15,10 @@ angular.module('app')
                 direction: 1,
                 move: null,
                 attack: [],
+                dashingStrike: {
+                  move: null,
+                  attack: []
+                },
                 hand: DeckService.deal(5)
             }, {
                 name: Values.playerTwo,
@@ -23,6 +27,10 @@ angular.module('app')
                 direction: -1,
                 move: null,
                 attack: [],
+                dashingStrike: {
+                  move: null,
+                  attack: []
+                },
                 hand: DeckService.deal(5)
             }];
 
@@ -77,6 +85,18 @@ angular.module('app')
           GameService.changePlayer();
           player.hand = PlayerUtilService.dealPlayerHand(player);
           service.players[parseInt(action.opponentPlayerIndex)] = opponentPlayer;
+        };
+
+        service.dashStrike = function dashingStrike(player) {
+          // check if attack numbers match
+          // check if attack + move is a valid move
+
+          // move player to that spot
+          // attack player with that spot
+
+          // block or retreat to opposing player
+            // if cant retreat or block then game over
+
         };
 
         return service;
