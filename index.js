@@ -1,8 +1,9 @@
-var logfmt = require("logfmt");
-var gzippo = require('gzippo');
-var express = require('express');
-var app = express();
- 
+var logfmt = require('logfmt'),
+    path = require('path'),
+    gzippo = require('gzippo'),
+    express = require('express'),
+    app = express();
+
 app.use(logfmt.requestLogger());
-app.use(gzippo.staticGzip("" + __dirname + "/dist"));
+app.use(gzippo.staticGzip(path.join(__dirname, '/dist')));
 app.listen(process.env.PORT || 8080);
