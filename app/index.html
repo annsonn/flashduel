@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width">
         <link rel="shortcut icon" href="/favicon.ico">
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-        <!-- build:css(.tmp) styles/main.css -->  
+        <!-- build:css(.tmp) styles/main.css -->
         <link rel="stylesheet" href="styles/bootstrap.css">
         <link rel="stylesheet" href="styles/main.css">
         <!-- endbuild -->
@@ -32,15 +32,15 @@
             <tabset justified="true">
               <tab heading="Move">
                 <br>
-                <div ng-include="'views/move.html'"></div>
+                <div ng-include="'views/move.html'" ng-controller="MoveCtrl"></div>
               </tab>
               <tab heading="Attack">
                 <br>
-                <div ng-include="'views/attack.html'"></div>
+                <div ng-include="'views/attack.html'" ng-controller="AttackCtrl"></div>
               </tab>
               <tab heading="Dashing Stike">
                 <br>
-                <div ng-include="'views/dashingstrike.html'"></div>
+                <div ng-include="'views/dashingstrike.html'" ng-controller="DashingStrikeCtrl"></div>
               </tab>
             </tabset>
           </div>
@@ -63,6 +63,9 @@
         <!-- build:js({app,.tmp}) scripts/main.js -->
         <script src="scripts/main.js"></script>
         <script src="scripts/controllers/MainController.js"></script>
+        <script src="scripts/controllers/MoveCtrl.js"></script>
+        <script src="scripts/controllers/AttackCtrl.js"></script>
+        <script src="scripts/controllers/DashingCtrl.js"></script>
         <script src="scripts/services/BoardService.js"></script>
         <script src="scripts/services/DeckService.js"></script>
         <script src="scripts/services/GameService.js"></script>
