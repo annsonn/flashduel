@@ -4,6 +4,12 @@ angular.module('app')
     .service('PlayerService', function($log, BoardService, GameService, DeckService, PlayerUtilService, Values) {
         var service = {};
 
+        var turnOver = function(player){
+            GameService.changePlayer();
+            player.move = null; //reset move
+            player.attack = null;
+        };
+
         // todo: should this be controlled by gameservice?
         service.resetPlayers = function resetPlayers() {
             DeckService.shuffle();
@@ -40,28 +46,16 @@ angular.module('app')
         service.players = service.resetPlayers();
 
         service.move = function move(player, direction) {
-          if (player.move === null || !direction) {
-            return;
-          }
           player.position = BoardService.actualMove(player, direction);
-          GameService.changePlayer();
 
           DeckService.discardCards(player.hand.splice(player.move , 1));
-
           player.hand = PlayerUtilService.dealPlayerHand(player);
-          player.move = null; //reset move
+          turnOver(player);
         };
 
-        service.attack = function attack(player) {
+        service.attack = function attack(player, attack) {
 
-          var action = {
-            attack: PlayerUtilService.attackNumbersMatch(player)
-          };
-
-          if (action.attack.number == 0) {
-              $log.log('no attack card selected');
-              return {error: 'no attack card selected'};
-          }
+          var action = { attack: attack };
 
           action.targetLocation =  player.position + player.direction*action.attack.number;
           action.opponentPlayerIndex = BoardService.getPlayerByLocation(action.targetLocation);
