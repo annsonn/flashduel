@@ -6,4 +6,4 @@
   <label ng-repeat="card in player.hand track by $index" class="btn btn-warning" ng-model="player.dashingStrike.attack[$index]" btn-checkbox>{{card}}</label>
 </div>
 
-<button class="btn btn-success" ng-click="actions.dashingStrike(player)">Dashing Strike!</button>
+<button class="btn btn-success" ng-click="dashingStrike(player)">Dashing Strike!</button>

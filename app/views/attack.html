@@ -1,4 +1,4 @@
 <div class="btn-group">
   <label ng-repeat="card in player.hand track by $index" class="btn btn-warning" ng-model="player.attack[$index]" btn-checkbox>{{card}}</label>
 </div>
-<button class="btn btn-success" ng-click="actions.attack(player, attack)">Attack!</button>
+<button class="btn btn-success" ng-click="attack(player, attack)">Attack!</button>

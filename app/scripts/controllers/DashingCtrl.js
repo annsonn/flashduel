@@ -3,6 +3,10 @@
  */
 'use strict';
 
-angular.module('app').controller('DashingCtrl', function($scope, $log) {
+angular.module('app').controller('DashingCtrl', function($scope, $log, PlayerService) {
+    $scope.dashingStrike = function(player) {
 
+
+        PlayerService.dashingStrike(player);
+    };
 });
