@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('app')
-    .service('PlayerUtilService', function($log, DeckService) {
+    .service('PlayerUtilService', function($log, DeckService, BoardService) {
       var service = {};
 
       service.dealPlayerHand = function DealPlayerHand(player) {
@@ -14,23 +14,33 @@ angular.module('app')
 
       };
 
-      service.attackNumbersMatch = function attackNumbersMatch(player) {
-        var attack = {
+      service.attackNumbersMatch = function attackNumbersMatch(player, attack) {
+        var result = {
           number: 0,
           quantity: 0
         };
-        for (var i = 0; i < player.attack.length; i++) {
-          if (attack.number === 0 && player.attack[i] == true) {
-            attack.number = player.hand[i];
+
+        for (var i = 0; i < attack.length; i++) {
+          if (result.number === 0 && attack[i] == true) {
+            result.number = player.hand[i];
           }
-          if (player.attack[i] == true && attack.number == player.hand[i]) {
-            attack.quantity = attack.quantity + 1;
+          if (attack[i] == true && result.number == player.hand[i]) {
+            result.quantity = result.quantity + 1;
           }
-          if (attack.number != 0 && player.attack[i] == true && player.hand[i] != attack.number) {
+          if (result.number != 0 && attack[i] == true && player.hand[i] != result.number) {
             return 0;
           }
         }
-        return attack;
+        return result;
+      };
+
+      service.canAttack = function canAttack(player, attack){
+          var action = { attack: attack };
+
+          action.targetLocation =  player.position + player.direction*action.attack.number;
+          action.opponentPlayerIndex = BoardService.getPlayerByLocation(action.targetLocation);
+
+          return action;
       };
 
       service.attackOpponent = function attackOpponent(player, opponentPlayer, action) {

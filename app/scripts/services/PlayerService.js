@@ -53,22 +53,11 @@ angular.module('app')
           turnOver(player);
         };
 
-        service.attack = function attack(player, attack) {
-
-          var action = { attack: attack };
-
-          action.targetLocation =  player.position + player.direction*action.attack.number;
-          action.opponentPlayerIndex = BoardService.getPlayerByLocation(action.targetLocation);
-
-          if (action.opponentPlayerIndex == '') {
-              $log.log('cannot attack opponent with ', action.attack.number);
-              return {error: 'cannot attack opponent with ' + action.attack.number};
-          }
+        service.attack = function attack(player, action) {
 
           $log.log('attacking opponent player with ', action.attack.number, ' quantity', action.attack.quantity);
 
           var opponentPlayer = service.players[parseInt(action.opponentPlayerIndex)];
-
           var resolution = PlayerUtilService.attackOpponent(player, opponentPlayer, action);
 
           if (resolution.successful) {

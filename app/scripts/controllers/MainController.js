@@ -12,9 +12,9 @@ angular.module('app')
 
     $scope.numCardsRemaining = function numCardsRemaining() {
       return DeckService.deck.length;
-    }
+    };
 
     $scope.discardPile = function discardPile() {
       return DeckService.discardPile;
-    }
+    };
 });
