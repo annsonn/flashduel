@@ -4,9 +4,11 @@
 'use strict';
 
 angular.module('app').controller('DashingCtrl', function($scope, $log, PlayerService) {
-    $scope.dashingStrike = function(player) {
+    $scope.dashingStrike = {attack: []};
+    $scope.dashingStrikeAction = function() {
+        $log.log('Player', $scope.player);
+        $log.log('Dashing Strike', $scope.dashingStrike);
 
-
-        PlayerService.dashingStrike(player);
+        //PlayerService.dashingStrike($scope.player, $scope.dashingStrike);
     };
 });
