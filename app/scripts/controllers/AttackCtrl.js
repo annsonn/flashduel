@@ -4,11 +4,14 @@ angular.module('app').controller('AttackCtrl', function($scope, $log, PlayerServ
     $scope.attack = [];
     $scope.attackPlayer = function() {
 
+        if ($scope.attack.length === 0) {
+            $log.error('No Attack cards selected!');
+            return false;
+        }
+
         var attack = PlayerUtilService.attackNumbersMatch($scope.player, $scope.attack);
 
-
-        //TODO: this isn't triggered
-        if (attack === 0 && PlayerUtilService.canAttack($scope.player, $scope.attack)) {
+        if (attack === 0) {
             $log.error('Attack numbers do not match!');
             return false;
         }
